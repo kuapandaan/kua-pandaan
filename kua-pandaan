@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KUA Kecamatan Pandaan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --bg: #F2F6F3;
+    --surface: #FFFFFF;
+    --ink: #14201A;
+    --muted: #56675E;
+    --navy: #0E5C3F;
+    --navy-ink: #0A4530;
+    --gold: #B4922E;
+    --gold-soft: #EDE6CE;
+    --line: #DAE4DD;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1712;
+      --surface: #17211B;
+      --ink: #E9F0EA;
+      --muted: #99A89E;
+      --navy: #7FC7A2;
+      --navy-ink: #BFE6D2;
+      --gold: #D8B95C;
+      --gold-soft: #2A2413;
+      --line: #29352E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F1712;
+    --surface: #17211B;
+    --ink: #E9F0EA;
+    --muted: #99A89E;
+    --navy: #7FC7A2;
+    --navy-ink: #BFE6D2;
+    --gold: #D8B95C;
+    --gold-soft: #2A2413;
+    --line: #29352E;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(76px + env(safe-area-inset-top, 0px)); }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Public Sans', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Newsreader', Georgia, serif; line-height: 1.15; font-weight: 500; color: var(--navy-ink); }
+  a { color: inherit; }
+  img, svg { max-width: 100%; display: block; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .overflow-x { overflow-x: auto; }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.02rem; }
+  .brand .mark {
+    width: 34px; height: 34px; border-radius: 8px; background: var(--navy);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .brand .mark svg { width: 18px; height: 18px; stroke: var(--gold); }
+  .navlinks { display: flex; gap: 28px; list-style: none; font-size: 0.94rem; }
+  .navlinks a { text-decoration: none; color: var(--muted); transition: color .15s; }
+  .navlinks a:hover, .navlinks a:focus-visible { color: var(--ink); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 7px; font-size: 0.92rem; font-weight: 600;
+    text-decoration: none; border: 1px solid transparent; cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-primary { background: var(--navy); color: #fff; }
+  .btn-primary:hover { background: var(--navy-ink); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--muted); }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 6px; }
+  .menu-toggle svg { width: 22px; height: 22px; stroke: var(--ink); }
+
+  /* Hero */
+  .hero { padding: 72px 0 56px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(2.1rem, 4vw, 3.1rem); letter-spacing: -0.01em; max-width: 15ch; }
+  .hero p.lead { margin-top: 20px; color: var(--muted); font-size: 1.08rem; max-width: 46ch; }
+  .hero-ctas { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .stat-panel {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+    padding: 4px 24px;
+  }
+  .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; }
+  .stat-row + .stat-row { border-top: 1px solid var(--line); }
+  .stat-num { font-family: 'Newsreader', serif; font-size: 1.7rem; color: var(--navy-ink); }
+  .stat-label { color: var(--muted); font-size: 0.88rem; max-width: 20ch; text-align: right; }
+
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  .section-head { max-width: 60ch; margin-bottom: 36px; }
+  .section-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+  .section-head p { color: var(--muted); margin-top: 10px; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; }
+  .about-grid p { color: var(--muted); }
+  .about-grid p + p { margin-top: 14px; }
+  .misi-list { list-style: none; margin-top: 8px; }
+  .misi-list li { position: relative; padding-left: 20px; color: var(--muted); }
+  .misi-list li + li { margin-top: 10px; }
+  .misi-list li::before {
+    content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--gold);
+  }
+  .visi-box { border-left: 2px solid var(--gold); padding-left: 18px; margin-top: 22px; }
+  .visi-box .k { font-size: 0.82rem; color: var(--muted); }
+  .visi-box p { font-family: 'Newsreader', serif; font-style: italic; font-size: 1.1rem; color: var(--navy-ink); margin-top: 4px; }
+
+  /* Services */
+  .service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .service-card { background: var(--surface); padding: 30px; }
+  .service-card .icon { width: 38px; height: 38px; border-radius: 9px; background: var(--gold-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .service-card .icon svg { width: 20px; height: 20px; stroke: var(--gold); }
+  .service-card h3 { font-size: 1.08rem; font-weight: 600; font-family: 'Public Sans', sans-serif; color: var(--ink); }
+  .service-card p { color: var(--muted); font-size: 0.94rem; margin-top: 8px; }
+
+  /* Location */
+  .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .map-frame {
+    border: 1px solid var(--line); border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
+    background: var(--surface); position: relative;
+  }
+  .loc-detail { display: flex; gap: 14px; }
+  .loc-detail + .loc-detail { margin-top: 18px; }
+  .loc-detail .icon { width: 34px; height: 34px; border-radius: 8px; background: var(--gold-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .loc-detail .icon svg { width: 17px; height: 17px; stroke: var(--gold); }
+  .loc-detail .t { font-size: 0.82rem; color: var(--muted); }
+  .loc-detail .v { color: var(--ink); }
+
+  /* Contact */
+  .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; }
+  .contact-list { list-style: none; }
+  .contact-list li { display: flex; gap: 14px; align-items: flex-start; }
+  .contact-list li + li { margin-top: 20px; }
+  .contact-list .icon { width: 34px; height: 34px; border-radius: 8px; background: var(--gold-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-list .icon svg { width: 17px; height: 17px; stroke: var(--gold); }
+  form { border: 1px solid var(--line); border-radius: 12px; padding: 28px; background: var(--surface); }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 0.86rem; color: var(--muted); margin-bottom: 6px; }
+  .field input, .field textarea {
+    width: 100%; padding: 11px 13px; border-radius: 7px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--ink); font-family: inherit; font-size: 0.96rem;
+  }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .form-note { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0; padding-bottom: calc(36px + env(safe-area-inset-bottom, 0px)); }
+  .foot-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .foot-grid .brand { font-size: 0.94rem; }
+  .foot-links { display: flex; gap: 20px; list-style: none; font-size: 0.88rem; color: var(--muted); }
+  .foot-links a { text-decoration: none; }
+  .foot-copy { font-size: 0.82rem; color: var(--muted); margin-top: 18px; }
+
+  @media (max-width: 860px) {
+    .navlinks, .nav .btn-primary { display: none; }
+    .menu-toggle { display: block; }
+    .hero-grid, .about-grid, .loc-grid, .contact-grid { grid-template-columns: 1fr; }
+    .service-grid { grid-template-columns: 1fr; }
+    .stat-label { text-align: left; max-width: none; }
+  }
+  nav.mobile-panel {
+    display: none; flex-direction: column; gap: 4px; padding: 16px 0 6px;
+    border-top: 1px solid var(--line);
+  }
+  nav.mobile-panel.open { display: flex; }
+  nav.mobile-panel a {
+    padding: 10px 4px; text-decoration: none; color: var(--muted); font-size: 0.96rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-8l8-6 8 6v8"/><path d="M9 21v-6h6v6"/><path d="M12 3v3"/><circle cx="12" cy="2.3" r="0.6" fill="currentColor" stroke="none"/></svg></span>
+      KUA Kecamatan Pandaan
+    </a>
+    <ul class="navlinks">
+      <li><a href="#tentang">Tentang Kami</a></li>
+      <li><a href="#layanan">Layanan</a></li>
+      <li><a href="#lokasi">Lokasi</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <a href="#kontak" class="btn btn-primary">Hubungi Kami</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-panel wrap" id="mobilePanel">
+    <a href="#tentang">Tentang Kami</a>
+    <a href="#layanan">Layanan</a>
+    <a href="#lokasi">Lokasi</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero" style="border-top:none; padding-top:56px;">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Melayani urusan agama Islam bagi masyarakat Kecamatan Pandaan</h1>
+        <p class="lead">KUA Kecamatan Pandaan mengurus pencatatan nikah dan rujuk, bimbingan perkawinan, wakaf, serta konsultasi keluarga secara tertib dan ramah.</p>
+        <div class="hero-ctas">
+          <a href="#kontak" class="btn btn-primary">Daftar Nikah</a>
+          <a href="#lokasi" class="btn btn-ghost">Lihat Lokasi Kantor</a>
+        </div>
+      </div>
+      <div class="stat-panel">
+        <div class="stat-row"><span class="stat-num">450+</span><span class="stat-label">Pasangan menikah tahun ini</span></div>
+        <div class="stat-row"><span class="stat-num">3–5 hari</span><span class="stat-label">Rata-rata pemrosesan berkas</span></div>
+        <div class="stat-row"><span class="stat-num">08.00–16.00</span><span class="stat-label">Jam layanan setiap hari kerja</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Tentang Kami</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>Kantor Urusan Agama (KUA) Kecamatan Pandaan adalah unit Kementerian Agama yang menangani urusan agama Islam di wilayah Kecamatan Pandaan, Kabupaten Pasuruan, mulai dari pencatatan nikah dan rujuk hingga pembinaan kehidupan beragama.</p>
+          <p>Kami hadir agar warga tidak perlu bingung mengurus dokumen pernikahan maupun urusan keagamaan lainnya. Setiap tahapan layanan disampaikan secara jelas sejak awal pendaftaran.</p>
+          <div class="visi-box">
+            <div class="k">Visi</div>
+            <p>Terwujudnya pelayanan urusan agama Islam yang profesional, transparan, dan berkualitas bagi masyarakat Kecamatan Pandaan.</p>
+          </div>
+        </div>
+        <div>
+          <div class="k" style="font-size:0.82rem;color:var(--muted);">Misi</div>
+          <ul class="misi-list" style="margin-top:10px;">
+            <li>Meningkatkan kualitas pelayanan pencatatan nikah dan rujuk</li>
+            <li>Membina keluarga sakinah, mawaddah, dan rahmah melalui bimbingan perkawinan</li>
+            <li>Mengelola data wakaf dan zakat secara tertib dan akuntabel</li>
+            <li>Menjaga kerukunan umat beragama di wilayah Kecamatan Pandaan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="layanan">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Layanan Kami</h2>
+        <p>Empat layanan utama yang dapat diakses warga Kecamatan Pandaan.</p>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="4" width="18" height="16" rx="2"/></svg></div>
+          <h3>Pencatatan Nikah &amp; Rujuk</h3>
+          <p>Pendaftaran, pemeriksaan berkas, dan pencatatan nikah maupun rujuk sesuai ketentuan.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.6"/><path d="M2 20c0-3.3 3-6 7-6s7 2.7 7 6"/><path d="M15.5 14.2c2.6.4 4.5 2.4 4.5 5"/></svg></div>
+          <h3>Bimbingan Perkawinan</h3>
+          <p>Pembekalan calon pengantin sebelum menikah untuk membangun keluarga sakinah.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/></svg></div>
+          <h3>Wakaf &amp; Zakat</h3>
+          <p>Layanan administrasi wakaf tanah dan pelaporan zakat di wilayah kecamatan.</p>
+        </div>
+        <div class="service-card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-8.4 8.4c-1.3 0-2.6-.3-3.7-.9L3 20l1.1-5.7A8.4 8.4 0 1121 11.5z"/></svg></div>
+          <h3>Konsultasi Keluarga</h3>
+          <p>Konsultasi masalah rumah tangga dan bimbingan keagamaan bagi masyarakat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lokasi">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Lokasi Kantor</h2>
+      </div>
+      <div class="loc-grid">
+        <div class="map-frame">
+          <svg viewBox="0 0 400 300" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="300" fill="var(--bg)"/>
+            <path d="M0 60 H400 M0 140 H400 M0 220 H400" stroke="var(--line)" stroke-width="2"/>
+            <path d="M60 0 V300 M180 0 V300 M300 0 V300" stroke="var(--line)" stroke-width="2"/>
+            <path d="M0 100 C120 80,180 180,400 150" stroke="var(--gold)" stroke-width="3" fill="none" opacity="0.5"/>
+            <circle cx="200" cy="140" r="9" fill="var(--navy)"/>
+            <circle cx="200" cy="140" r="16" fill="none" stroke="var(--navy)" stroke-width="2" opacity="0.35"/>
+            <path d="M200 122 a18 18 0 0 1 0 36 a18 18 0 0 1 0 -36" fill="none"/>
+          </svg>
+        </div>
+        <div>
+          <div class="loc-detail">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+            <div><div class="t">Alamat</div><div class="v">Jl. Raya Pandaan No. 45, Kecamatan Pandaan, Kabupaten Pasuruan, Jawa Timur 67156</div></div>
+          </div>
+          <div class="loc-detail">
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+            <div><div class="t">Jam Layanan</div><div class="v">Senin – Jumat, 08.00 – 16.00 WIB</div></div>
+          </div>
+          <div class="hero-ctas" style="margin-top:26px;">
+            <a class="btn btn-primary" href="https://maps.google.com/?q=KUA+Kecamatan+Pandaan+Pasuruan" target="_blank" rel="noopener">Buka di Google Maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Hubungi Kami</h2>
+        <p>Sampaikan pertanyaan atau pengaduan melalui saluran berikut.</p>
+      </div>
+      <div class="contact-grid">
+        <ul class="contact-list">
+          <li>
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 3a2 2 0 01-.4 2.1L8 10a16 16 0 006 6l1.2-1.3a2 2 0 012.1-.4c1 .3 2 .5 3 .7A2 2 0 0122 16.9z"/></svg></span>
+            <div><div class="t">Telepon</div><div class="v">(0343) 631-000</div></div>
+          </li>
+          <li>
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></span>
+            <div><div class="t">Email</div><div class="v">kuapandaan@kemenag.go.id</div></div>
+          </li>
+          <li>
+            <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
+            <div><div class="t">Alamat</div><div class="v">Jl. Raya Pandaan No. 45, Pandaan</div></div>
+          </li>
+        </ul>
+        <form id="contactForm">
+          <div class="field"><label for="nama">Nama</label><input id="nama" type="text" required></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" required></div>
+          <div class="field"><label for="pesan">Pesan</label><textarea id="pesan" required></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Kirim Pesan</button>
+          <p class="form-note">Pesan akan dikirim melalui aplikasi email Anda.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="brand">KUA Kecamatan Pandaan</div>
+      <ul class="foot-links">
+        <li><a href="#tentang">Tentang Kami</a></li>
+        <li><a href="#layanan">Layanan</a></li>
+        <li><a href="#lokasi">Lokasi</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </div>
+    <p class="foot-copy">© 2026 KUA Kecamatan Pandaan. Jl. Raya Pandaan No. 45, Kabupaten Pasuruan.</p>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const panel = document.getElementById('mobilePanel');
+  toggle.addEventListener('click', () => {
+    const open = panel.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    panel.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const nama = document.getElementById('nama').value;
+    const email = document.getElementById('email').value;
+    const pesan = document.getElementById('pesan').value;
+    const subject = encodeURIComponent('Pesan dari ' + nama);
+    const body = encodeURIComponent(pesan + '\n\nBalas ke: ' + email);
+    window.location.href = 'mailto:kuapandaan@kemenag.go.id?subject=' + subject + '&body=' + body;
+  });
+</script>
+
+</body>
+</html>
